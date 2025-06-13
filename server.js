@@ -1,0 +1,27 @@
+const dotenv = require('dotenv');
+dotenv.config();
+const express = require('express');
+const app = express();
+const mongoose = require('mongoose');
+const cors = require('cors');
+const testRouter = require('./controllers/tests');
+const passageRouter = require('./controllers/passage');
+const userRouter = require('./controllers/user');
+
+mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connection.on('connected', () => {
+  console.log(`Connected to MongoDB ${mongoose.connection.name}.`);
+});
+
+app.use(cors());
+app.use(express.json());
+
+// Routes go here
+app.use('/user', userRouter);
+app.use('/tests', testRouter);
+app.use('/passage', passageRouter);
+
+app.listen(3000, () => {
+  console.log('The express app is ready!');
+});
