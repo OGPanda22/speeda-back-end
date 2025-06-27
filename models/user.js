@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
 
     /*username*/
-    /*unique ensures no dupe usernames*/
+    /*unique property ensures no dupe usernames*/
     username: {
         type: String,
         required: true,
